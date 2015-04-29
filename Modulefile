@@ -1,5 +1,5 @@
 name 'duosecurity-duo_unix'
-version '0.3.1'
+version '0.3.2'
 source 'git://github.com/duosecurity/puppet-duo_unix'
 author 'Duo Security'
 license 'GPLv2'
