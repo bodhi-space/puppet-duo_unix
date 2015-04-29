@@ -15,6 +15,7 @@ class duo_unix::yum {
   if $::operatingsystem == 'Amazon' {
     $releasever = $::operatingsystemmajrelease ? {
       '2014'  => '6Server',
+      '2015'  => '6Server',
       default => undef,
     }
     $os = $::operatingsystem
