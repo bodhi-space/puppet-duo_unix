@@ -18,7 +18,7 @@ class duo_unix::yum {
       '2015'  => '6Server',
       default => undef,
     }
-    $os = $::operatingsystem
+    $os = 'RedHat'
   } elsif ( $::operatingsystem == 'RedHat' and $::operatingsystemmajrelease == 5 ) {
     $os = 'CentOS'
     $releasever = '$releasever'
