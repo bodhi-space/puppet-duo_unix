@@ -37,7 +37,7 @@ class duo_unix::pam {
         "set ${aug_pam_path}/2/control ${duo_unix::pam_unix_control}",
         "ins 100 after ${aug_pam_path}/2",
         "set ${aug_pam_path}/100/type auth",
-        "set ${aug_pam_path}/100/control sufficient",
+        "set ${aug_pam_path}/100/control ${duo_unix::pam_unix_control}",
         "set ${aug_pam_path}/100/module ${duo_unix::pam_module}"
       ],
       require => Package[$duo_unix::duo_package],
