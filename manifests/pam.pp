@@ -35,7 +35,7 @@ class duo_unix::pam {
     augeas { 'PAM Configuration':
       changes => [
         "set ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module}']/control requisite",
-        "ins 100 after ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module']",
+        "ins 100 after ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module}']",
         "set ${aug_pam_path}/100/type auth",
         "set ${aug_pam_path}/100/control sufficient",
         "set ${aug_pam_path}/100/module ${duo_unix::pam_module}"
