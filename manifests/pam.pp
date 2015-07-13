@@ -34,7 +34,7 @@ class duo_unix::pam {
   if $::osfamily == 'RedHat' {
     augeas { 'PAM Configuration':
       changes => [
-        "set ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module}']/control requisite",
+        "set ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module}'][last()]/control ${duo_unix::pam_unix_control}",
         "ins 100 after ${aug_pam_path}/*[type = 'auth'][module = '${duo_unix::pam_primary_module}']",
         "set ${aug_pam_path}/100/type auth",
         "set ${aug_pam_path}/100/control sufficient",
