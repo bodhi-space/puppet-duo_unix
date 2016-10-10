@@ -16,6 +16,7 @@ class duo_unix::yum {
     $releasever = $::operatingsystemmajrelease ? {
       '2014'  => '6Server',
       '2015'  => '6Server',
+      '2016'  => '6Server',
       default => undef,
     }
     $os = 'RedHat'
