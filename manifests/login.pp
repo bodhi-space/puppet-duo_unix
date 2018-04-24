@@ -28,5 +28,4 @@ class duo_unix::login {
       notify  => Service[$duo_unix::ssh_service];
     }
   }
-
 }

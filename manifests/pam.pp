@@ -57,5 +57,4 @@ class duo_unix::pam {
       onlyif  => "match ${aug_match} size == 0";
     }
   }
-
 }

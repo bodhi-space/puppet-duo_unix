@@ -27,44 +27,15 @@ class duo_unix (
   if $ikey == '' or $skey == '' or $host == '' {
     fail('ikey, skey, and host must all be defined.')
   }
-
-  if $usage != 'login' and $usage != 'pam' {
-    fail('You must configure a usage of duo_unix, either login or pam.')
-  }
-
-  case $::osfamily {
-    'RedHat': {
+  case $::operatingsystem {
+    'Amazon': {
       $duo_package = 'duo_unix'
       $ssh_service = 'sshd'
-      $gpg_file    = '/etc/pki/rpm-gpg/RPM-GPG-KEY-DUO'
-
-      $pam_file = $::operatingsystemrelease ? {
-        /^5/                      => '/etc/pam.d/system-auth',
-        /^(6|7|2014|2015|2016)/   => '/etc/pam.d/password-auth'
-      }
-
-      $pam_module  = $::architecture ? {
-        i386   => '/lib/security/pam_duo.so',
-        i686   => '/lib/security/pam_duo.so',
-        x86_64 => '/lib64/security/pam_duo.so'
-      }
+      $gpg_file = '/etc/pki/rpm-gpg/RPM-GPG-KEY-DUO'
+      $pam_file = '/etc/pam.d/password-auth'
+      $pam_module = '/lib64/security/pam_duo.so'
 
       include duo_unix::yum
-      include duo_unix::generic
-    }
-    'Debian': {
-      $duo_package = 'duo-unix'
-      $ssh_service = 'ssh'
-      $gpg_file    = '/etc/apt/DEB-GPG-KEY-DUO'
-      $pam_file    = '/etc/pam.d/common-auth'
-
-      $pam_module  = $::architecture ? {
-        i386  => '/lib/security/pam_duo.so',
-        i686  => '/lib/security/pam_duo.so',
-        amd64 => '/lib64/security/pam_duo.so'
-      }
-
-      include duo_unix::apt
       include duo_unix::generic
     }
     default: {
@@ -74,7 +45,9 @@ class duo_unix (
 
   if $usage == 'login' {
     include duo_unix::login
-  } else {
+  } elsif $usage == 'pam' {
     include duo_unix::pam
+  } else {
+    fail('You must configure a usage of duo_unix, either login or pam.')
   }
 }
